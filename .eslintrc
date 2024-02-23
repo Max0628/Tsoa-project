@@ -1,0 +1,7 @@
+{
+  "extends": ["eslint:recommended"], //繼承模板eslint:recommended，以此來檢查代碼
+  "rules": {
+    "semi": ["error", "always"], //每行code最後必須有分號
+    "quotes": ["error", "double"] //引號若不符合規則會報錯，只能是雙引號
+  }
+}
