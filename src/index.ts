@@ -4,6 +4,7 @@ import router from './controller/todo';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import { PrismaClient } from '@prisma/client';
+
 const prisma = new PrismaClient();
 const app = express();
 const port = 3000;
