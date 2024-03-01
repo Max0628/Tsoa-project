@@ -9,9 +9,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model todo {
-  id        Int      @id @default(autoincrement())
-  title     String
-  completed Boolean  @default(false)
-  createdAt DateTime @default(now())
+model Member {
+  id       Int      @id @default(autoincrement())
+  name     String
+  email    String   @unique
+  password String
+  createAt DateTime @default(now())
 }

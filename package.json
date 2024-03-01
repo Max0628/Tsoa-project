@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec ts-node src/index.ts",
+    "dev": "nodemon --exec ts-node src/app.ts",
     "build": "npx tsc",
-    "start": "node dist/index.js",
+    "start": "node dist/app.js",
     "swagger": "swagger-jsdoc -d src/swaggerDef.js -o src/swagger.json && npm run build"
   },
   "keywords": [],
