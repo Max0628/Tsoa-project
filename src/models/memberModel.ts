@@ -1,12 +1,18 @@
-//src/models/memberModel.ts
+///memberModel.ts
+import prisma from '../libs/db';
 
-//製作一個叫做Member的interface,並且把它導出
-export interface Member {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-  createAt: Date;
+class MemberModel {
+  async findByName(name: string) {
+    try {
+      const members = await prisma.member.findFirst({ where: { name } });
+      console.log(`data is : ${members}`);
+
+      return members;
+    } catch (error) {
+      console.log(`can't find the data : ${error}`);
+      return error;
+    }
+  }
 }
 
-export default Member;
+export default MemberModel;

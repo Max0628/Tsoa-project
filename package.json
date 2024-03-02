@@ -2,12 +2,11 @@
   "name": "my_project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/src/app.js",
   "scripts": {
-    "dev": "nodemon --exec ts-node src/app.ts",
-    "build": "npx tsc",
-    "start": "node dist/app.js",
-    "swagger": "swagger-jsdoc -d src/swaggerDef.js -o src/swagger.json && npm run build"
+    "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
+    "build": "tsoa spec-and-routes && tsc",
+    "start": "node dist/app.js"
   },
   "keywords": [],
   "author": "",
@@ -16,8 +15,10 @@
     "@types/node": "^20.11.20",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.6",
+    "concurrently": "^8.2.2",
     "nodemon": "^3.1.0",
     "prisma": "^5.10.2",
+    "swagger-autogen": "^2.23.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
