@@ -1,6 +1,6 @@
 //src/controllers/member.ts
 import { Controller, Get, Path, Query, Route } from 'tsoa';
-import MemberService from '../service/memberService';
+import MemberService from '../services/memberService';
 
 @Route('member')
 export class MemberController extends Controller {

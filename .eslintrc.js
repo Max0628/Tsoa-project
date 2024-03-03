@@ -4,8 +4,8 @@ module.exports = {
   env: {
     node: true, // 指定環境，此處為 Node.js 環境
   },
-  plugins: ['@typescript-eslint/eslint-plugin'], // 指定所使用的 ESLint 插件
-  extends: ['plugin:@typescript-eslint/recommended', 'prettier'], // 指定所使用的 ESLint 擴展
+  plugins: ['@typescript-eslint/eslint-plugin', 'prettier'], // 指定所使用的 ESLint 插件
+  extends: ['plugin:@typescript-eslint/recommended', 'prettier', "plugin:prettier/recommended"],
   overrides: [
     {
       files: ['**/*.ts'], // 對所有 .ts 文件進行覆蓋設置
