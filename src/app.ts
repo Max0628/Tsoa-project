@@ -1,21 +1,27 @@
 //src/app.ts
 import express, { json, urlencoded } from 'express';
+
+//要產生routes.ts才能引進RegisterRoutes
 import { RegisterRoutes } from '../src/routes';
-
-export const app = express();
-const port = 3000;
-import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../swagger.json';
+import swaggerUi from 'swagger-ui-express';
 
-//掛載middleware
+const app = express();
+const port = 3000;
+
 // Use body parser to read sent json payloads
 app.use(urlencoded({ extended: true }));
 app.use(json());
 
+//swagger文件黨
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 RegisterRoutes(app);
 
+//errowhandler
+
 app.listen(port, () => {
   console.log(`伺服器正在監聽port ${port}`);
 });
+
+export default app;

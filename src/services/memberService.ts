@@ -1,6 +1,5 @@
 //src/service/memberService.ts
 
-import { log } from 'console';
 import MemberModel from '../models/memberModel';
 
 class MemberService {

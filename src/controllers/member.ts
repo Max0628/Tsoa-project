@@ -1,9 +1,10 @@
-//src/controllers/member.ts
-import { Controller, Get, Path, Query, Route } from 'tsoa';
+// src/controllers/member.ts
+
+import { Controller, Get, Path, Route } from 'tsoa';
 import MemberService from '../services/memberService';
 
 @Route('member')
-export class MemberController extends Controller {
+class MemberController extends Controller {
   private readonly memberService: MemberService;
 
   constructor() {
@@ -12,10 +13,10 @@ export class MemberController extends Controller {
   }
 
   @Get('{name}')
-  public async getUser(@Path() name: string, @Query() id?: number) {
-    return {
-      name,
-      id,
-    };
+  public async getUser(@Path() name: string) {
+    const member = await this.memberService.findByName(name);
+    return member;
   }
 }
+
+export default MemberController;
