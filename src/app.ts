@@ -1,7 +1,5 @@
 //src/app.ts
 import express, { json, urlencoded } from 'express';
-
-//要產生routes.ts才能引進RegisterRoutes
 import { RegisterRoutes } from '../src/routes';
 import swaggerDocument from '../swagger.json';
 import swaggerUi from 'swagger-ui-express';

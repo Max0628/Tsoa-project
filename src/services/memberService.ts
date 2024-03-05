@@ -3,10 +3,19 @@
 import MemberModel from '../models/memberModel';
 
 class MemberService {
-  memberModel = new MemberModel();
+  public memberModel = new MemberModel();
 
-  public findByName(name: string) {
-    return this.memberModel.findByName(name);
+  public async getMember(name: string, id?: number) {
+    return await this.memberModel.getMember(name, id);
+  }
+
+  public async createMember(
+    name: string,
+    email: string,
+    password: string,
+    createAt: Date,
+  ) {
+    return await this.memberModel.createMember(name, email, password, createAt);
   }
 }
 

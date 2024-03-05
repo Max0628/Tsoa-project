@@ -1,6 +1,6 @@
 // src/controllers/member.ts
 
-import { Controller, Get, Path, Route } from 'tsoa';
+import { Body, Controller, Get, Path, Post, Query, Route } from 'tsoa';
 import MemberService from '../services/memberService';
 
 @Route('member')
@@ -13,10 +13,20 @@ class MemberController extends Controller {
   }
 
   @Get('{name}')
-  public async getUser(@Path() name: string) {
-    const member = await this.memberService.findByName(name);
-    return member;
+  public async getMemberByName(@Path() name: string, @Query() id?: number) {
+    return await this.memberService.getMember(name, id);
+  }
+
+  @Post()
+  public async createMember(@Body() requestBody: any) {
+    const { name, email, password, createAt } = requestBody;
+    return await this.memberService.createMember(
+      name,
+      email,
+      password,
+      createAt,
+    );
   }
 }
 
-export default MemberController;
+export { MemberController };

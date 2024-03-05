@@ -3,7 +3,7 @@
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute, HttpStatusCodeLiteral, TsoaResponse, fetchMiddlewares } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import  MemberController  from './controllers/member';
+import { MemberController } from './controllers/member';
 import type { RequestHandler, Router } from 'express';
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -21,9 +21,9 @@ export function RegisterRoutes(app: Router) {
     // ###########################################################################################################
         app.get('/member/:name',
             ...(fetchMiddlewares<RequestHandler>(MemberController)),
-            ...(fetchMiddlewares<RequestHandler>(MemberController.prototype.getUser)),
+            ...(fetchMiddlewares<RequestHandler>(MemberController.prototype.getMemberByName)),
 
-            function MemberController_getUser(request: any, response: any, next: any) {
+            function MemberController_getMemberByName(request: any, response: any, next: any) {
             const args = {
                     name: {"in":"path","name":"name","required":true,"dataType":"string"},
                     id: {"in":"query","name":"id","dataType":"double"},
@@ -38,7 +38,32 @@ export function RegisterRoutes(app: Router) {
                 const controller = new MemberController();
 
 
-              const promise = controller.getUser.apply(controller, validatedArgs as any);
+              const promise = controller.getMemberByName.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/member',
+            ...(fetchMiddlewares<RequestHandler>(MemberController)),
+            ...(fetchMiddlewares<RequestHandler>(MemberController.prototype.createMember)),
+
+            function MemberController_createMember(request: any, response: any, next: any) {
+            const args = {
+                    requestBody: {"in":"body","name":"requestBody","required":true,"dataType":"any"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new MemberController();
+
+
+              const promise = controller.createMember.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
