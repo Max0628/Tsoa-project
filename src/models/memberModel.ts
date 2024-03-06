@@ -14,6 +14,18 @@ class MemberModel {
     }
   }
 
+  public async getPrivateData(email: string, password: string) {
+    try {
+      const memberPrivateData = await prisma.member.findFirst({
+        where: { email, password },
+      });
+      return memberPrivateData;
+    } catch (error) {
+      console.log(`can't find memberPrivateData : ${error}`);
+      return error;
+    }
+  }
+
   public async createMember(
     name: string,
     email: string,

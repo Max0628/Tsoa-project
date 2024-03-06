@@ -9,6 +9,10 @@ class MemberService {
     return await this.memberModel.getMember(name, id);
   }
 
+  public async getPrivateData(email: string, password: string) {
+    return await this.memberModel.getPrivateData(email, password);
+  }
+
   public async createMember(
     name: string,
     email: string,
