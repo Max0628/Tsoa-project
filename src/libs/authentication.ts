@@ -1,4 +1,5 @@
 //src/libs/authentication.ts
+
 import * as express from 'express';
 import * as jwt from 'jsonwebtoken';
 
@@ -8,19 +9,21 @@ function expressAuthentication(
   scopes?: string[],
 ) {
   if (securityName === 'jwt') {
-    const token = request.headers?.authorization?.replace('Beare', '');
-    if (!token) return Promise.reject({});
+    const token = request.headers?.authorization?.split(' ')[1];
+    console.log(token);
+    if (!token) throw new Error('Missing authorization header');
 
     let userData;
     try {
       userData = jwt.verify(token, 'secret');
+      console.log(userData);
     } catch (error) {
-      return Promise.reject({});
+      return Promise.reject({ error: 'Unsupported security scheme' });
     }
 
     if (userData) return Promise.resolve({ userData });
   }
-  return Promise.reject({});
+  return Promise.reject({ error: ' Unauthorized ' });
 }
 
 export { expressAuthentication };

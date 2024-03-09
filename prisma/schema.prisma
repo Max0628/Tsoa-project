@@ -1,14 +1,18 @@
 //prisma/schema.prisma
 
+//定義prisma生成器，使用prisma-client-js的功能
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
+//定義資料庫來源，使用mysql類，從環境變數中獲得資料庫url
+datasource db1 {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
+
+//製作稱為member的schema
 model member {
   id       Int      @id @default(autoincrement())
   name     String

@@ -1,5 +1,5 @@
 // src/controllers/member.ts
-import { Body, Controller, Get, Post, Request, Route, Security } from 'tsoa';
+import { Body, Controller, Get, Path, Post, Route, Security } from 'tsoa';
 import MemberService from '../services/memberService';
 
 @Route('member')
@@ -11,36 +11,32 @@ class MemberController extends Controller {
     this.memberService = new MemberService();
   }
 
-  // @Get('{name}')
-  // public async getMemberByName(@Path() name: string, @Query() id?: number) {
-  //   return await this.memberService.getMember(name, id);
-  // }
-
+  @Security('jwt')
   @Post()
   public async createMember(@Body() requestBody: any) {
-    const { name, email, password, createAt } = requestBody;
-    return await this.memberService.createMember(
-      name,
-      email,
-      password,
-      createAt,
-    );
+    const { name, email, password } = requestBody;
+    return await this.memberService.createMemberData(name, email, password);
   }
 
-  @Security('{jwt}')
+  @Security('jwt')
   @Get('{name}')
-  public async getUser(@Request() req: any, name: string) {
-    console.log(req.user);
-    return {
-      user: req.user,
-    };
+  public async getUser(@Path() name: string) {
+    try {
+      const memberData = await this.memberService.getMemberData(name);
+      console.log(memberData);
+      return memberData;
+    } catch (error) {
+      console.error(`Error fetching member data by name: ${error}`);
+      this.setStatus(500);
+      return { error: 'Internal server error' };
+    }
   }
 
   @Post('{login}')
   public async login(@Body() body: { email: string; password: string }) {
     const { email, password } = body;
     const token = await this.memberService.getPrivateData(email, password);
-    console.log({ token });
+    console.log(token);
     if (!token) throw new Error('Login failed.');
     return {
       data: token,

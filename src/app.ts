@@ -4,6 +4,7 @@ import { RegisterRoutes } from '../src/routes';
 import swaggerDocument from '../swagger.json';
 import swaggerUi from 'swagger-ui-express';
 import { ValidateError } from 'tsoa';
+import cors from 'cors';
 
 const app = express();
 const port = 3000;
@@ -11,6 +12,7 @@ const port = 3000;
 // Use body parser to read sent json payloads
 app.use(urlencoded({ extended: true }));
 app.use(json());
+app.use(cors());
 
 //swagger文件黨
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

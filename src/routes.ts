@@ -22,6 +22,7 @@ export function RegisterRoutes(app: Router) {
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
         app.post('/member',
+            authenticateMiddleware([{"jwt":[]}]),
             ...(fetchMiddlewares<RequestHandler>(MemberController)),
             ...(fetchMiddlewares<RequestHandler>(MemberController.prototype.createMember)),
 
@@ -47,13 +48,12 @@ export function RegisterRoutes(app: Router) {
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/member/:name',
-            authenticateMiddleware([{"{jwt}":[]}]),
+            authenticateMiddleware([{"jwt":[]}]),
             ...(fetchMiddlewares<RequestHandler>(MemberController)),
             ...(fetchMiddlewares<RequestHandler>(MemberController.prototype.getUser)),
 
             function MemberController_getUser(request: any, response: any, next: any) {
             const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
                     name: {"in":"path","name":"name","required":true,"dataType":"string"},
             };
 
