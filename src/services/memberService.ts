@@ -20,7 +20,9 @@ class MemberService {
       return null;
     }
     //把找到的資料,跟'secret'字串,一起簽名行程token,設定過期時間為1小時
-    const token = jwt.sign(user, 'secret', { expiresIn: 60 * 60 });
+    const token = jwt.sign(user, 'JWT_SECRET', {
+      expiresIn: 60 * 60,
+    });
 
     return token;
   }

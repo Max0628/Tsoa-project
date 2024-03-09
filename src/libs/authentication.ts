@@ -15,7 +15,7 @@ function expressAuthentication(
 
     let userData;
     try {
-      userData = jwt.verify(token, 'secret');
+      userData = jwt.verify(token, 'JWT_SECRET');
       console.log(userData);
     } catch (error) {
       return Promise.reject({ error: 'Unsupported security scheme' });
