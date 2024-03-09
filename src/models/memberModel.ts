@@ -14,17 +14,10 @@ class MemberModel {
       return error;
     }
   }
-  //取得會員私密資料，輸入參數email.password
-  public async getPrivateData(email: string, password: string) {
-    try {
-      const memberPrivateData = await prisma.member.findFirst({
-        where: { email, password },
-      });
-      return memberPrivateData;
-    } catch (error) {
-      console.log(`can't find memberPrivateData : ${error}`);
-      return error;
-    }
+
+  //使用email,passowrd藉由prisma到db撈資料
+  public async getLoginUser(email: string, password: string) {
+    return prisma.member.findFirst({ where: { email, password } });
   }
 
   //創建新會員資料，輸入參數name,email,password

@@ -10,14 +10,14 @@ class MemberController extends Controller {
     super();
     this.memberService = new MemberService();
   }
-
+  //建立新成員
   @Security('jwt')
   @Post()
   public async createMember(@Body() requestBody: any) {
     const { name, email, password } = requestBody;
     return await this.memberService.createMemberData(name, email, password);
   }
-
+  //查詢單一成員資料
   @Security('jwt')
   @Get('{name}')
   public async getUser(@Path() name: string) {
@@ -32,10 +32,11 @@ class MemberController extends Controller {
     }
   }
 
+  //登入系統,獲得token
   @Post('{login}')
   public async login(@Body() body: { email: string; password: string }) {
     const { email, password } = body;
-    const token = await this.memberService.getPrivateData(email, password);
+    const token = await this.memberService.getUserToken(email, password);
     console.log(token);
     if (!token) throw new Error('Login failed.');
     return {

@@ -92,7 +92,9 @@
 							"application/json": {
 								"schema": {
 									"properties": {
-										"data": {}
+										"data": {
+											"type": "string"
+										}
 									},
 									"required": [
 										"data"
