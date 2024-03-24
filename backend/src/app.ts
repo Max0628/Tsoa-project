@@ -1,13 +1,13 @@
 //src/app.ts
 import express, { json, urlencoded } from 'express';
-import { RegisterRoutes } from '../src/routes';
+import { RegisterRoutes } from './routes';
 import swaggerDocument from '../swagger.json';
 import swaggerUi from 'swagger-ui-express';
 import { ValidateError } from 'tsoa';
 import cors from 'cors';
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 // Use body parser to read sent json payloads
 app.use(urlencoded({ extended: true }));

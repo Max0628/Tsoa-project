@@ -11,3 +11,7 @@
 - 指令 `npm run dev` 測試階段，動態編譯 TypeScript 檔案
 - 指令 `npm run build` 建構階段，編譯 TypeScript 檔案並生成 JavaScript 檔案
 - 指令 `npm run start` 執行階段，執行 JavaScript 檔案
+
+
+前端 port 3000
+後端 port 3001

@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "genieai.chatgpt-vscode"
+        "genieai.chatgpt-vscode",
+        "rangav.vscode-thunder-client"
     ]
 }
