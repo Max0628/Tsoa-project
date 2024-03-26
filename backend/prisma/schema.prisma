@@ -12,8 +12,8 @@ datasource db1 {
 }
 
 
-//製作稱為member的schema
-model member {
+//製作稱為user的schema
+model user {
   id       Int      @id @default(autoincrement())
   name     String
   email    String   @unique
