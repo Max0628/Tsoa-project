@@ -20,14 +20,10 @@ async  function fetcher(url){
     return responseData
   } catch (error) {
     console.log(`fetching error:${error}`);
-    return error
+    return error;
 
   }
 }
-
-
-
-
 
 
 function App() {
@@ -35,15 +31,17 @@ function App() {
   const {
     data:user,
     error,
-  }=useSWR("http://localhost:3001/user/profile",fetcher);
+    // isLoading,
+  }=useSWR("http://127.0.0.1:3001/user/profile",fetcher);
 
 
   useEffect(()=>{
     if(error){
+
       navigate({Login})
     }
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[Boolean(error),navigate,user?.id]);
-
 
 
   return (
