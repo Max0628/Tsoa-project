@@ -1,58 +1,50 @@
 //src/App.js
- import {BrowserRouter,Routes,Route,useNavigate} from "react-router-dom"
+import { BrowserRouter,Routes,Route, useNavigate } from "react-router-dom"
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import useSWR from "swr"
-import axios from "axios"
-import Cookie from "js-cookie"
+import useSWR from "swr";
+import axios from "axios";
+import Cookies from "js-cookie";
 import { useEffect } from "react";
 
-//建立fetcher函數，參數由useSWR的url帶入
-async function fetcher(url){
 
+async  function fetcher(url){
   try {
-    //把瀏覽器中的cooke(jwt)存到變數token裡面
-    const token = Cookie.get("jwt_token");
-    //把jwt塞到http get request的header裡面，然後用變數response接住http response
+    const token = Cookies.get('jwt_token')
     const response = await axios.get(url,{
       headers:{
-        Authorization:`Bearer ${token}`
-      }
+        Authorization :`Bearer ${token}`}
     })
-
-    if (response.status !== 200) {
-      throw new Error('Server responded with an error');
-    }
-
-    //如果response裡面有user屬性就回傳
-    const user = response?.data?.user;
-    console.log(user);
-    return user;
+    const responseData = await response.data
+    console.log(`responseData is:${responseData}`);
+    return responseData
   } catch (error) {
-    console.log(`fetching error: ${error}`);
-    return error;
+    console.log(`fetching error:${error}`);
+    return error
+
   }
 }
 
 
 
 
+
+
 function App() {
-  //啟動導航hook
-  const  navigate  = useNavigate()
+  const navigate = useNavigate();
   const {
     data:user,
-    error
-    //isLoading
-  } = useSWR("http://127.0.0.1:3001/user/profile",fetcher)
+    error,
+  }=useSWR("http://localhost:3001/user/profile",fetcher);
 
- useEffect(()=>{
-  if(error){
-    console.log(error);
-    navigate("login")
-  }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
- },[Boolean(error),navigate,user?.id])
+
+  useEffect(()=>{
+    if(error){
+      navigate({Login})
+    }
+  },[Boolean(error),navigate,user?.id]);
+
+
 
   return (
     <BrowserRouter>
@@ -60,8 +52,7 @@ function App() {
        <Route path="/" element={<Home/>}> </Route>
        <Route path="/login" element={<Login/>}> </Route>
      </Routes>
-    </BrowserRouter>
-  
+    </BrowserRouter>  
   );
 }
 

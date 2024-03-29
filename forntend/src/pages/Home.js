@@ -1,7 +1,7 @@
 //src/pages/Home.js
 const Home = () => {
   return (
-    <div>Home page</div>
+    <div>This is home page,you are already login!!</div>
   )
 }
 
