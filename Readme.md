@@ -1,17 +1,18 @@
-# 專案架構
+# Project content
 
-- 導入 TypeScript，Prisma 做為 ORM，MySQL 做為資料庫，Express 撰寫伺服器
+- 
 
-# 使用工具
+# tools
 
-- 使用 Swagger 與 tsoa 優化 API 開發
+- Typescript/mySQL/Prisma/Express
+-plugin：Tsoa/Swagger
 
-# 專案功能
+# commands
 
-- 指令 `npm run dev` 測試階段，動態編譯 TypeScript 檔案
-- 指令 `npm run build` 建構階段，編譯 TypeScript 檔案並生成 JavaScript 檔案
-- 指令 `npm run start` 執行階段，執行 JavaScript 檔案
+-  `npm run dev`     test,to compile Typescript file
+-  `npm run build`   build,compile Typescript to Javascript
+-  `npm run start`   execute Javascript file
 
 
-前端 port 3000
-後端 port 3001
+frontend port 3000
+backend port 3001
