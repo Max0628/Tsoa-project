@@ -14,13 +14,12 @@ class UserController extends Controller {
   }
 
 
-  //查詢單一成員資料
+  //user/name路由，用姓名查看個人資料
   @Security('jwt')
-  @Get('{name}')
+  @Get("{name}")
   public async getUser(@Path() name: string) {
     try {
       const userData = await this.userService.getUserDataFromModel(name);
-      console.log(userData);
       return userData;
     } catch (error) {
       console.error(`Error fetching user data by name: ${error}`);
@@ -33,17 +32,15 @@ class UserController extends Controller {
   @Security("jwt")
   @Get("profile")
   public async profile(@Request() req:any){
-    return {
-      user:req.user
-    }
+    const user= req.user
+    return user
   }
 
   //登入系統,獲得token
-  @Post('{login}')
+  @Post('login')
   public async login(@Body() body: { email: string; password: string }) {
     const { email, password } = body;
     const token = await this.userService.getUserTokenFromModel(email, password);
-    console.log(token);
     if (!token) throw new Error('Login failed.');
     return {
       data: token,
@@ -54,9 +51,11 @@ class UserController extends Controller {
 
   //建立新成員
   @Post()
-  public async createuser(@Body() requestBody: any) {
+  public async createUser(@Body() requestBody: any) {
     const { name, email, password } = requestBody;
-    return await this.userService.createUserDataFromModel(name, email, password);
+    const newUser =  await this.userService.createUserDataFromModel(name, email, password);
+    console.log(`newUser:${newUser}`);
+    return {newUser};
   }
   
 }

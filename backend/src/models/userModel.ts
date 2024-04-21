@@ -7,7 +7,6 @@ class UserModel {
   public async getUserFromPrisma(name: string) {
     try {
       const user = await prisma.user.findFirst({ where: { name } });
-      console.log(`userData is : ${user}`);
       return user;
     } catch (error) {
       console.log(`can't find the userData : ${error}`);
@@ -15,11 +14,10 @@ class UserModel {
     }
   }
 
-  //使用email,passowrd藉由prisma到db撈資料
+  //使用email,password藉由prisma到db撈資料
   public async getLoginUserFromPrisma(email: string, password: string) {
     try {
       const loginData = await prisma.user.findFirst({ where: { email, password } });
-      console.log(`loginData is: ${loginData}`);
       return loginData;
     } catch (error) {
       console.log(`can't find loginData : ${error}`);

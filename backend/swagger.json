@@ -61,15 +61,7 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {
-									"properties": {
-										"user": {}
-									},
-									"required": [
-										"user"
-									],
-									"type": "object"
-								}
+								"schema": {}
 							}
 						}
 					}
@@ -82,7 +74,7 @@
 				"parameters": []
 			}
 		},
-		"/user/{login}": {
+		"/user/login": {
 			"post": {
 				"operationId": "Login",
 				"responses": {
@@ -133,13 +125,21 @@
 		},
 		"/user": {
 			"post": {
-				"operationId": "Createuser",
+				"operationId": "CreateUser",
 				"responses": {
 					"200": {
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"properties": {
+										"newUser": {}
+									},
+									"required": [
+										"newUser"
+									],
+									"type": "object"
+								}
 							}
 						}
 					}

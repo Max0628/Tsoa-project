@@ -12,6 +12,7 @@
       }
     }
   },
+
   "routes": {
     "routesDir": "./src",
     "authenticationModule": "./src/libs/authentication.ts" 

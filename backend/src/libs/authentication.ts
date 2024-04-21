@@ -15,14 +15,12 @@ function expressAuthentication(
   if (securityName === 'jwt') {
     //從request物件中的header屬性取出authorization屬性，設定給變數token
     const token = request.headers?.authorization?.split(' ')[1];
-    console.log(token);
     if (!token) throw new Error('Missing authorization header');
 
     let userData;
     try {
       //驗證jwt是否正確
       userData = jwt.verify(token,'JWT_SECRET');
-      console.log(userData);
     } catch (error) {
       return Promise.reject({ error: 'Unsupported security scheme' });
     }

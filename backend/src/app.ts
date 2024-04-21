@@ -1,6 +1,6 @@
 //src/app.ts
 import express, { json, urlencoded } from 'express';
-import { RegisterRoutes } from './routes';
+import { RegisterRoutes } from './routes';  
 import swaggerDocument from '../swagger.json';
 import swaggerUi from 'swagger-ui-express';
 import { ValidateError } from 'tsoa';
@@ -14,12 +14,12 @@ app.use(urlencoded({ extended: true }));
 app.use(json());
 app.use(cors());
 
-//swagger文件黨
+//swagger文件檔
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 RegisterRoutes(app);
 
-//errowhandler
+//errorHandler
 app.use((err: any, _req: any, res: any, next: any) => {
   if (err instanceof ValidateError) {
     res.json({ error: err.fields });

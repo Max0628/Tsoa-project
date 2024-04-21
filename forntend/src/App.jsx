@@ -1,11 +1,12 @@
 //src/App.js
-import { BrowserRouter,Routes,Route, useNavigate } from "react-router-dom"
+import { Routes,Route, useNavigate } from "react-router-dom"
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import useSWR from "swr";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useEffect } from "react";
+import { useEffect } from "react"
+
 
 
 async  function fetcher(url){
@@ -13,6 +14,9 @@ async  function fetcher(url){
     const token = Cookies.get('jwt_token')
     const response = await axios.get(url,{
       headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
         Authorization :`Bearer ${token}`}
     })
     const responseData = await response.data
@@ -20,7 +24,7 @@ async  function fetcher(url){
     return responseData
   } catch (error) {
     console.log(`fetching error:${error}`);
-    return error;
+    return error
 
   }
 }
@@ -45,12 +49,10 @@ function App() {
 
 
   return (
-    <BrowserRouter>
      <Routes>
        <Route path="/" element={<Home/>}> </Route>
        <Route path="/login" element={<Login/>}> </Route>
      </Routes>
-    </BrowserRouter>  
   );
 }
 
